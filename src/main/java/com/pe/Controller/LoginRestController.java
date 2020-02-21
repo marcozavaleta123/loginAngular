@@ -3,11 +3,7 @@ package com.pe.Controller;
 import java.io.IOException;
 import java.util.Date;
 
-import javax.xml.ws.Response;
-
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,6 +25,11 @@ public class LoginRestController {
 	
 	@Autowired
 	private LoginService loginService;
+	
+	@RequestMapping(value = "/suma", method = RequestMethod.GET)
+	public int iniciarSesion(@RequestParam(value="num1") Integer num1, @RequestParam(value="num2") Integer num2){
+		return num1+num2;
+	}
 	
 	@RequestMapping(value = "/iniciarSesion", method = RequestMethod.GET)
 	public RestResponse iniciarSesion(@RequestParam(value="usuario") String usuario, @RequestParam(value="clave") String clave)
