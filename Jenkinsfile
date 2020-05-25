@@ -17,6 +17,16 @@ pipeline {
             }
         }
 		
+		stage('Scan Sonar Backend'){
+            steps{
+                script {
+                    docker.image('maven:3.6-jdk-8-alpine').inside() {
+                        sh "mvn -f pom.xml -Dmaven.repo.local=/home/.m2/repository --batch-mode sonar:sonar -Dsonar.host.url=${SONAR_HOST}"
+                    }
+                }
+            }
+        }
+		
 		stage('Deploy Backend'){
             steps{
                 script {
@@ -27,15 +37,5 @@ pipeline {
             }
         }
         
-        stage('Scan Sonar Backend'){
-            steps{
-                script {
-                    docker.image('maven:3.6-jdk-8-alpine').inside() {
-                        sh "mvn -f pom.xml -Dmaven.repo.local=/home/.m2/repository --batch-mode sonar:sonar -Dsonar.host.url=${SONAR_HOST}"
-                    }
-                }
-            }
-        }
-
     }
 }
