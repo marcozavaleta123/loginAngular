@@ -35,7 +35,7 @@ public class LoginRestController {
 	public RestResponse iniciarSesion(@RequestParam(value="usuario") String usuario, @RequestParam(value="clave") String clave)
 			throws JsonParseException, JsonMappingException, IOException {
 		System.out.println("hola mundo");
-		
+		     
 		RestResponse r = new RestResponse();
 		
 		if(loginService.validarLogin(usuario, clave).equals(Constante.msjOK)){
