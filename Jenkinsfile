@@ -5,7 +5,7 @@ pipeline {
     stage('Building image') {
       steps{
         script {
-          docker build -t abc .
+          docker.build("xyz")
         }
       }
     }
