@@ -5,7 +5,17 @@ pipeline {
     stage('Building image') {
       steps{
         script {
-          docker.build("xyz")
+          app = docker.build("xyz")
+        }
+      }
+    }
+	
+	stage('run image') {
+      steps{
+        script {
+          app.inside() {
+                        sh "docker run -d -p 8080:8080 xyz"
+          }
         }
       }
     }
