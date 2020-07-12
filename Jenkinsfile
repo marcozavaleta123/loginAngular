@@ -11,7 +11,7 @@ pipeline {
             steps{
                 script {
                     docker.image('app:latest').inside() {
-                       sh "docker build -t app ."
+                       sh "docker run -d -p 8080:8080 app"
                     }
                 }
             }
