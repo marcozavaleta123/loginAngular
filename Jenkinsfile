@@ -6,7 +6,7 @@ pipeline {
       steps{
         script {
           app = docker.build("xyz")
-		  docker.image('xyz').withRun("run -d -p 8000:8080 aaa") {c ->
+		  docker.image('xyz').withRun("-p 8000:8080 aaa") {c ->
            sh "docker logs ${c.id}"
           }
         }
