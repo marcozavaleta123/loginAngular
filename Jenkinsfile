@@ -1,22 +1,16 @@
 pipeline {
-    agent any
-    
-    environment {
-           SONAR_HOST = 'http://192.168.99.100:9000'
-    }
-
-    stages {
-	
-	    stage('Docker build'){
-            steps{
-                script {
-                    docker.image('app:latest').inside() {
-                       sh "docker run -d -p 8080:8080 app"
-                    }
-                }
-            }
+  environment {
+    registry = "abc/docker-test"
+    registryCredential = abc
+  }
+  agent any
+  stages {
+    stage('Building image') {
+      steps{
+        script {
+          docker.build registry + ":$BUILD_NUMBER"
         }
-        
-        
+      }
     }
+  }
 }
